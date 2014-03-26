@@ -1,0 +1,38 @@
+mb.add(m1);
+        final SplashScreen splash = SplashScreen.getSplashScreen();
+        if (splash == null) {
+            System.out.println("SplashScreen.getSplashScreen() returned null");
+            return;
+        }
+        Graphics2D g = splash.createGraphics();
+        if (g == null) {
+            System.out.println("g is null");
+            return;
+        }
+        for(int i=0; i<100; i++) {
+            renderSplashFrame(g, i);
+            splash.update();
+            try {
+                Thread.sleep(90);
+            }
+            catch(InterruptedException e) {
+            }
+        }
+        splash.close();
+        setVisible(true);
+        toFront();
+    }
+    public void actionPerformed(ActionEvent ae) {
+        System.exit(0);
+    }
+    
+    private static WindowListener closeWindow = new WindowAdapter(){
+        public void windowClosing(WindowEvent e){
+            e.getWindow().dispose();
+        }
+    };
+    
+    public static void main (String args[]) {
+        SplashDemo test = new SplashDemo();
+    }
+}
